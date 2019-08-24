@@ -8,11 +8,10 @@
 	</h2>
 
 	<div class="col-sm-4 col-sm-offset-5">
-		<c:if test="${param.error}">
-			<p class="alert alert-danger">
-				<c:out value="Invalid username and password!" />
-			</p>
-		</c:if>
+		<h4 class="text-danger text-center">
+			<c:out
+				value="${sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}" />
+		</h4>
 	</div>
 
 	<form action="${pageContext.request.contextPath}/login"
