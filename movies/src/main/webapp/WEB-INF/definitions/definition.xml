@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<definition name="movies" template="/WEB-INF/templates/default.jsp">
+		<put-attribute name="title" value="Home"></put-attribute>
+		<put-attribute name="header" value="/WEB-INF/templates/header.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/movies.jsp"></put-attribute>
+	</definition>
+
+	<definition name="loginForm" extends="movies">
+		<put-attribute name="title" value="Login Form"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/loginForm.jsp"></put-attribute>
+	</definition>
+
+	<definition name="denied" extends="movies">
+		<put-attribute name="title" value="Access Denied"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/denied.jsp"></put-attribute>
+	</definition>
+
+	<definition name="movieForm" extends="movies">
+		<put-attribute name="title" value="Movie Form"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/movieForm.jsp"></put-attribute>
+	</definition>
+
+	<definition name="users" extends="movies">
+		<put-attribute name="title" value="Users"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/users.jsp"></put-attribute>
+	</definition>
+
+	<definition name="userForm" extends="movies">
+		<put-attribute name="title" value="User Form"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/userForm.jsp"></put-attribute>
+	</definition>
+
+</tiles-definitions> 

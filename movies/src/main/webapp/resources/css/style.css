@@ -1,0 +1,11 @@
+@CHARSET "UTF-8";
+
+body {
+	background-color: rgb(220, 220, 220);
+	margin-top: 20px;
+}
+
+.table-responsive>.table>tbody>tr>td, .table-responsive>.table>tbody>tr>th
+	{
+	border: 2px solid white;
+}

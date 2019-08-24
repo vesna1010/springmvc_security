@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:jdbc-user-service
+				data-source-ref="dataSource"
+				users-by-username-query="select username, password, enabled from users where username = ?"
+				authorities-by-username-query="select* from authorities, users_authorities where users_authorities.user_id=? and users_authorities.authority_id=id" />
+			<security:password-encoder ref="passwordEncoder"></security:password-encoder>
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+	<security:http use-expressions="true" request-matcher="mvc">
+
+		<security:intercept-url pattern="/resources/**"
+			access="permitAll" />
+
+		<security:intercept-url pattern="/denied"
+			method="GET" access="permitAll" />
+
+		<security:intercept-url pattern="/" method="GET"
+			access="permitAll" />
+
+		<security:intercept-url pattern="/login/**"
+			method="GET" access="!isAuthenticated()" />
+
+		<security:intercept-url pattern="/login"
+			method="POST" access="!isAuthenticated()" />
+
+		<security:intercept-url pattern="/logout"
+			method="POST" access="isAuthenticated()" />
+
+		<security:intercept-url pattern="/movieForm/**"
+			method="GET" access="isAuthenticated()" />
+
+		<security:intercept-url pattern="/saveMovie"
+			method="POST" access="isAuthenticated()" />
+
+		<security:intercept-url pattern="/editMovie/{id}/**"
+			method="GET"
+			access="isAuthenticated() and @movieConverter.convert(#id).getUser().getUsername() == principal.username" />
+
+		<security:intercept-url pattern="/deleteMovie/{id}/**"
+			method="GET"
+			access="isAuthenticated() and @movieConverter.convert(#id).getUser().getUsername() == principal.username" />
+
+		<security:intercept-url pattern="/saveVote/{id}/**"
+			method="GET" access="isAuthenticated()" />
+
+		<security:intercept-url pattern="/**" method="GET"
+			access="hasAuthority('ADMIN')" />
+
+		<security:session-management>
+			<security:concurrency-control
+				session-registry-alias="sessionRegistry" max-sessions="1" />
+		</security:session-management>
+
+		<security:form-login authentication-failure-url="/login?error=true"
+			login-page="/login" login-processing-url="/login" />
+
+		<security:logout logout-success-url="/login"
+			logout-url="/logout" />
+
+		<security:access-denied-handler
+			error-page="/denied" />
+
+	</security:http>
+
+</beans>
