@@ -2,14 +2,12 @@ package com.vesna1010.movies.validator;
 
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import com.vesna1010.movies.model.Authority;
 import com.vesna1010.movies.model.User;
 import com.vesna1010.movies.service.UserService;
 
-@Component
 public class UserValidator implements Validator {
 
 	public static final String USERNAME_REGEX = "^\\w{8,15}$";
