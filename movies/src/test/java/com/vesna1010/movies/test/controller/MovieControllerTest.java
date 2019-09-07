@@ -56,8 +56,8 @@ public class MovieControllerTest extends BaseControllerTest {
 
 		mockMvc.perform(get("/"))
 		       .andExpect(status().isOk())
-               .andExpect(model().attribute("movies", hasSize(2)))
-               .andExpect(view().name("movies"));
+                       .andExpect(model().attribute("movies", hasSize(2)))
+                       .andExpect(view().name("movies"));
 
 		verify(movieService, times(1)).findAllMovies();
 	}
@@ -75,8 +75,8 @@ public class MovieControllerTest extends BaseControllerTest {
 	public void renderEmptyMovieFormWithUserTest() throws Exception {
 		mockMvc.perform(get("/movieForm"))
 		       .andExpect(status().isOk())
-               .andExpect(model().attribute("movie", equalTo(new Movie())))
-               .andExpect(view().name("movieForm"));
+                       .andExpect(model().attribute("movie", equalTo(new Movie())))
+                       .andExpect(view().name("movieForm"));
 	}
 	
 	@Test
@@ -146,7 +146,7 @@ public class MovieControllerTest extends BaseControllerTest {
 		
 		mockMvc.perform(get("/editMovie/1"))
 		       .andExpect(status().is3xxRedirection())
-	           .andExpect(redirectedUrlPattern("**/login"));
+	               .andExpect(redirectedUrlPattern("**/login"));
 		
 		verify(movieService, times(0)).findMovieById(1);
 	}
@@ -184,7 +184,7 @@ public class MovieControllerTest extends BaseControllerTest {
 		
 		mockMvc.perform(get("/deleteMovie/1"))
 		       .andExpect(status().is3xxRedirection())
-	           .andExpect(redirectedUrlPattern("**/login"));
+	               .andExpect(redirectedUrlPattern("**/login"));
 		
 		verify(movieService, times(0)).findMovieById(1);
 		verify(movieService, times(0)).deleteMovie(movieA);
@@ -198,7 +198,7 @@ public class MovieControllerTest extends BaseControllerTest {
 		
 		mockMvc.perform(get("/deleteMovie/1"))
 		       .andExpect(status().is3xxRedirection())
-	           .andExpect(redirectedUrl("/"));
+	               .andExpect(redirectedUrl("/"));
 		
 		verify(movieService, times(2)).findMovieById(1);
 		verify(movieService, times(1)).deleteMovie(movieA);
@@ -212,7 +212,7 @@ public class MovieControllerTest extends BaseControllerTest {
 		
 		mockMvc.perform(get("/deleteMovie/1"))
 		       .andExpect(status().isForbidden())
-	           .andExpect(forwardedUrl("/denied"));
+	               .andExpect(forwardedUrl("/denied"));
 		
 		verify(movieService, times(1)).findMovieById(1);
 		verify(movieService, times(0)).deleteMovie(movieA);
@@ -243,7 +243,7 @@ public class MovieControllerTest extends BaseControllerTest {
 		
 		mockMvc.perform(get("/saveVote/1"))
 		       .andExpect(status().is3xxRedirection())
-               .andExpect(redirectedUrl("/"));
+                       .andExpect(redirectedUrl("/"));
 		
 		verify(movieService, times(1)).findMovieById(1);
 		verify(userService, times(1)).findUserByUsername("UsernameA");
