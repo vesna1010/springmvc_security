@@ -84,8 +84,8 @@ public class UserControllerTest extends BaseControllerTest {
 
 		mockMvc.perform(get("/users"))
 		       .andExpect(status().isOk())
-	           .andExpect(model().attribute("users", hasSize(2)))
-	           .andExpect(view().name("users"));
+	               .andExpect(model().attribute("users", hasSize(2)))
+	               .andExpect(view().name("users"));
 
 		verify(userService, times(1)).findAllUsers();
 	}
@@ -121,9 +121,9 @@ public class UserControllerTest extends BaseControllerTest {
 		
 		mockMvc.perform(get("/userForm"))
 		       .andExpect(status().isOk())
-	           .andExpect(model().attribute("user", equalTo(new User())))
-	           .andExpect(model().attribute("authorities", hasSize(2)))
-	           .andExpect(view().name("userForm"));
+	               .andExpect(model().attribute("user", equalTo(new User())))
+	               .andExpect(model().attribute("authorities", hasSize(2)))
+	               .andExpect(view().name("userForm"));
 		
 		verify(authorityService, times(1)).findAllAuthorities();
 	}
@@ -218,7 +218,7 @@ public class UserControllerTest extends BaseControllerTest {
 		
 		mockMvc.perform(get("/resetVote/UsernameA"))
 		       .andExpect(status().is3xxRedirection())
-	           .andExpect(redirectedUrl("/users"));
+	               .andExpect(redirectedUrl("/users"));
 		
 		verify(userService, times(1)).findUserByUsername("UsernameA");
 		verify(userService, times(1)).resetUserVotes(userA);
@@ -260,7 +260,7 @@ public class UserControllerTest extends BaseControllerTest {
 		
 		mockMvc.perform(get("/disableUser/UsernameA"))
 		       .andExpect(status().is3xxRedirection())
-	           .andExpect(redirectedUrl("/users"));
+	               .andExpect(redirectedUrl("/users"));
 		
 		verify(userService, times(1)).findUserByUsername("UsernameA");
 		verify(userService, times(1)).disableUser(userA);
@@ -302,7 +302,7 @@ public class UserControllerTest extends BaseControllerTest {
 		
 		mockMvc.perform(get("/deleteUser/UsernameA"))
 		       .andExpect(status().is3xxRedirection())
-	           .andExpect(redirectedUrl("/users"));
+	               .andExpect(redirectedUrl("/users"));
 		
 		verify(userService, times(1)).findUserByUsername("UsernameA");
 		verify(userService, times(1)).deleteUser(userA);
@@ -340,9 +340,9 @@ public class UserControllerTest extends BaseControllerTest {
 		mockMvc.perform(get("/loggedUsers"))
 		       .andExpect(status().isOk())
 		       .andExpect(jsonPath("$", hasSize(2)))
-	           .andExpect(jsonPath("$[0].username", equalTo("UsernameA")))
-	           .andExpect(jsonPath("$[1].username", equalTo("UsernameB")))
-	           .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE));
+	               .andExpect(jsonPath("$[0].username", equalTo("UsernameA")))
+	               .andExpect(jsonPath("$[1].username", equalTo("UsernameB")))
+	               .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE));
 
 		verify(userService, times(1)).findLoggedUsers();
 	}
